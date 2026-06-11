@@ -4,6 +4,9 @@ import {
   Code2, Database, Cloud, Workflow, ShieldCheck, GraduationCap,
   TrendingUp, Briefcase, Sparkles,
 } from "lucide-react";
+import ClickSpark from "@/components/ClickSpark";
+import TechLogoLoop from "@/components/TechLogoLoop";
+
 
 const TITLE = "Muhammad Shakil — Full-Stack Developer & CRM Specialist";
 const DESC =
@@ -123,6 +126,8 @@ const experience = [
 function Portfolio() {
   return (
     <div className="min-h-screen">
+      <ClickSpark />
+
       {/* Skip link for a11y */}
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground">
         Skip to content
@@ -187,8 +192,12 @@ function Portfolio() {
           </div>
         </section>
 
+        {/* Tech logo loop */}
+        <TechLogoLoop />
+
         {/* Expertise */}
         <section id="expertise" className="mx-auto max-w-6xl px-6 py-20 scroll-mt-20">
+
           <SectionHeader eyebrow="Core expertise" title="The stack I ship with" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {skills.map(({ icon: Icon, title, items }) => (
