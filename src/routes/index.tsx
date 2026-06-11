@@ -192,8 +192,12 @@ function Portfolio() {
           </div>
         </section>
 
+        {/* Tech logo loop */}
+        <TechLogoLoop />
+
         {/* Expertise */}
         <section id="expertise" className="mx-auto max-w-6xl px-6 py-20 scroll-mt-20">
+
           <SectionHeader eyebrow="Core expertise" title="The stack I ship with" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {skills.map(({ icon: Icon, title, items }) => (
