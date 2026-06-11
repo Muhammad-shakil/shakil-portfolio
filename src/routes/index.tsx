@@ -4,6 +4,9 @@ import {
   Code2, Database, Cloud, Workflow, ShieldCheck, GraduationCap,
   TrendingUp, Briefcase, Sparkles,
 } from "lucide-react";
+import ClickSpark from "@/components/ClickSpark";
+import TechLogoLoop from "@/components/TechLogoLoop";
+
 
 const TITLE = "Muhammad Shakil — Full-Stack Developer & CRM Specialist";
 const DESC =
@@ -123,6 +126,8 @@ const experience = [
 function Portfolio() {
   return (
     <div className="min-h-screen">
+      <ClickSpark />
+
       {/* Skip link for a11y */}
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground">
         Skip to content
