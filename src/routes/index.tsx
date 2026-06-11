@@ -92,7 +92,7 @@ const experience = [
     company: "Hurak Tech",
     role: "Full-Stack Laravel Developer",
     period: "Dec 2024 — Present",
-    stack: "PHP · Laravel · Next.js · MySQL · Stripe · AWS · Docker",
+    stack: "PHP · Laravel · Next.js · MySQL · Stripe · AWS · Docker · GTM · GA4",
   },
   {
     company: "ADB Word",
