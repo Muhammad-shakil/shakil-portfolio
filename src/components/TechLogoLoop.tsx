@@ -1,3 +1,10 @@
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+
 const logos = [
   { name: "Laravel", slug: "laravel", color: "FF2D20" },
   { name: "PHP", slug: "php", color: "777BB4" },
@@ -17,29 +24,44 @@ const logos = [
 ];
 
 export default function TechLogoLoop() {
-  const items = [...logos, ...logos];
   return (
-    <section aria-label="Technologies" className="relative py-12 border-y border-border overflow-hidden">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 z-10 bg-gradient-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 z-10 bg-gradient-to-l from-background to-transparent" />
-      <div className="flex gap-14 animate-marquee whitespace-nowrap">
-        {items.map((l, i) => (
-          <div
-            key={`${l.slug}-${i}`}
-            className="flex items-center gap-3 shrink-0 opacity-70 hover:opacity-100 transition-opacity"
-            title={l.name}
-          >
-            <img
-              src={`https://cdn.simpleicons.org/${l.slug}/${l.color}`}
-              alt={`${l.name} logo`}
-              width={32}
-              height={32}
-              loading="lazy"
-              className="h-8 w-8"
-            />
-            <span className="font-mono text-sm text-muted-foreground">{l.name}</span>
-          </div>
-        ))}
+    <section
+      aria-label="Technologies"
+      className="relative py-12 border-y border-border overflow-hidden"
+    >
+      <div className="container mx-auto px-6">
+        <h2 className="sr-only">Technologies I work with</h2>
+        <Carousel
+          opts={{ align: "start", loop: true, dragFree: true }}
+          plugins={[Autoplay({ delay: 1800, stopOnInteraction: false })]}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {logos.map((l) => (
+              <CarouselItem
+                key={l.slug}
+                className="pl-4 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
+              >
+                <div
+                  className="glass-card flex flex-col items-center justify-center gap-3 py-6 px-4 h-full hover:-translate-y-1 transition-transform"
+                  title={l.name}
+                >
+                  <img
+                    src={`https://cdn.simpleicons.org/${l.slug}/${l.color}`}
+                    alt={`${l.name} logo`}
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    className="h-10 w-10"
+                  />
+                  <span className="font-mono text-xs text-muted-foreground text-center">
+                    {l.name}
+                  </span>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );
