@@ -135,25 +135,7 @@ function Portfolio() {
       </a>
 
       {/* Nav */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-background/60 border-b border-border">
-        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-lg font-semibold tracking-tight">
-            M<span className="text-primary">.</span>Shakil
-          </a>
-          <ul className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <li><a href="#expertise" className="hover:text-foreground transition-colors">Expertise</a></li>
-            <li><a href="#projects" className="hover:text-foreground transition-colors">Projects</a></li>
-            <li><a href="#experience" className="hover:text-foreground transition-colors">Experience</a></li>
-            <li><a href="#contact" className="hover:text-foreground transition-colors">Contact</a></li>
-          </ul>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
-          >
-            Hire me <ArrowRight className="h-4 w-4" />
-          </a>
-        </nav>
-      </header>
+      <NavHeader />
 
       <main id="main">
         {/* Hero */}
