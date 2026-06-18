@@ -102,23 +102,31 @@ function useActiveSection() {
   const [active, setActive] = useState<string>("");
 
   useEffect(() => {
-    const sections = navLinks.map((l) => document.querySelector(l.href)).filter(Boolean) as Element[];
-    if (!sections.length) return;
+    const updateActiveSection = () => {
+      const probeY = window.scrollY + window.innerHeight * 0.35;
+      const activeLink = navLinks.find(({ href }) => {
+        const section = document.querySelector(href);
+        if (!section) return false;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) {
-          setActive(`#${visible.target.id}`);
-        }
-      },
-      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-    );
+        const { top, bottom } = section.getBoundingClientRect();
+        const sectionTop = top + window.scrollY;
+        const sectionBottom = bottom + window.scrollY;
+        return probeY >= sectionTop && probeY < sectionBottom;
+      });
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+      setActive(activeLink?.href ?? "");
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    window.addEventListener("hashchange", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+      window.removeEventListener("hashchange", updateActiveSection);
+    };
   }, []);
 
   return active;
