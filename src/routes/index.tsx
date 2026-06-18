@@ -129,18 +129,24 @@ function useActiveSection() {
     };
   }, []);
 
-  return active;
+  return [active, setActive] as const;
 }
 
 function NavHeader() {
-  const active = useActiveSection();
+  const [active, setActive] = useActiveSection();
+
+  const goToTop = () => {
+    setActive("");
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/60 border-b border-border">
       <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-display text-lg font-semibold tracking-tight">
+        <button type="button" onClick={goToTop} className="font-display text-lg font-semibold tracking-tight">
           M<span className="text-primary">.</span>Shakil
-        </a>
+        </button>
         <ul className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           {navLinks.map(({ href, label }) => {
             const isActive = active === href;
@@ -148,6 +154,7 @@ function NavHeader() {
               <li key={href}>
                 <a
                   href={href}
+                  onClick={() => setActive(href)}
                   className={`relative transition-colors ${isActive ? "text-foreground font-medium" : "hover:text-foreground"}`}
                 >
                   {label}
