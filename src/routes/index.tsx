@@ -4,6 +4,7 @@ import {
   Code2, Database, Cloud, Workflow, ShieldCheck, GraduationCap,
   TrendingUp, Briefcase, Sparkles,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import ClickSpark from "@/components/ClickSpark";
 import TechLogoLoop from "@/components/TechLogoLoop";
 
