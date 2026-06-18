@@ -4,6 +4,7 @@ import {
   Code2, Database, Cloud, Workflow, ShieldCheck, GraduationCap,
   TrendingUp, Briefcase, Sparkles,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import ClickSpark from "@/components/ClickSpark";
 import TechLogoLoop from "@/components/TechLogoLoop";
 
@@ -90,6 +91,77 @@ const projects = [
   },
 ];
 
+const navLinks = [
+  { href: "#expertise", label: "Expertise" },
+  { href: "#projects", label: "Projects" },
+  { href: "#experience", label: "Experience" },
+  { href: "#contact", label: "Contact" },
+];
+
+function useActiveSection() {
+  const [active, setActive] = useState<string>("");
+
+  useEffect(() => {
+    const sections = navLinks.map((l) => document.querySelector(l.href)).filter(Boolean) as Element[];
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          setActive(`#${visible.target.id}`);
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  return active;
+}
+
+function NavHeader() {
+  const active = useActiveSection();
+
+  return (
+    <header className="sticky top-0 z-40 backdrop-blur-md bg-background/60 border-b border-border">
+      <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#top" className="font-display text-lg font-semibold tracking-tight">
+          M<span className="text-primary">.</span>Shakil
+        </a>
+        <ul className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+          {navLinks.map(({ href, label }) => {
+            const isActive = active === href;
+            return (
+              <li key={href}>
+                <a
+                  href={href}
+                  className={`relative transition-colors ${isActive ? "text-foreground font-medium" : "hover:text-foreground"}`}
+                >
+                  {label}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-primary" />
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <a
+          href="#contact"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
+        >
+          Hire me <ArrowRight className="h-4 w-4" />
+        </a>
+      </nav>
+    </header>
+  );
+}
+
 const experience = [
   {
     company: "Hurak Tech",
@@ -134,25 +206,7 @@ function Portfolio() {
       </a>
 
       {/* Nav */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-background/60 border-b border-border">
-        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-lg font-semibold tracking-tight">
-            M<span className="text-primary">.</span>Shakil
-          </a>
-          <ul className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <li><a href="#expertise" className="hover:text-foreground transition-colors">Expertise</a></li>
-            <li><a href="#projects" className="hover:text-foreground transition-colors">Projects</a></li>
-            <li><a href="#experience" className="hover:text-foreground transition-colors">Experience</a></li>
-            <li><a href="#contact" className="hover:text-foreground transition-colors">Contact</a></li>
-          </ul>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 transition"
-          >
-            Hire me <ArrowRight className="h-4 w-4" />
-          </a>
-        </nav>
-      </header>
+      <NavHeader />
 
       <main id="main">
         {/* Hero */}
