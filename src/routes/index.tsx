@@ -355,10 +355,10 @@ function Portfolio() {
                 </p>
               </div>
               <ul className="space-y-4">
-                <ContactItem icon={Mail} label="Email" value="shakil@example.com" href="mailto:shakil@example.com" />
-                <ContactItem icon={Phone} label="Phone" value="+92 307 1234567" href="tel:+923071234567" />
+                <ContactItem icon={Mail} label="Email" value="malikshakil449@gmail.com" href="mailto:malikshakil449@gmail.com" />
+                <ContactItem icon={Phone} label="Phone" value="+92 307 4526026" href="tel:+923074526026" />
                 <ContactItem icon={MapPin} label="Location" value="Guldasht Town, Lahore" />
-                <ContactItem icon={Linkedin} label="LinkedIn" value="linkedin.com/in/mshakil" href="https://linkedin.com" />
+                <ContactItem icon={Linkedin} label="LinkedIn" value="https://www.linkedin.com/in/muhammad-shakil-hanif/" href="https://www.linkedin.com/in/muhammad-shakil-hanif/" />
                 <ContactItem icon={Github} label="GitHub" value="github.com/mshakil" href="https://github.com" />
               </ul>
             </div>
